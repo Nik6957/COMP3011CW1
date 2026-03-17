@@ -4,5 +4,9 @@ app = FastAPI()
 
 
 @app.get("/")
-async def root():
-    return {"message": "Hello World"}
+def read_root():
+    return {"message": "Reward Program API"}
+
+@app.post("/rewards")
+def create_reward(name: str, points: int):
+    return {"status": "success", "added": name, "points": points}
