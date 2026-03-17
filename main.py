@@ -1,6 +1,14 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+import sqlite3
 
 app = FastAPI()
+
+def connect_db():
+    connect = sqlite3.connect('rewards.db', check_same_thread = False)
+    return connect
+
+db = connect_db()
+db.execute('CREATE TABLE IF NOT EXISTS rewards (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, points INTEGER)')
 
 # Create
 @app.post("/rewards")
